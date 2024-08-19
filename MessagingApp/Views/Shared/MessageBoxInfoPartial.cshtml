@@ -1,0 +1,70 @@
+@* Views/Shared/MessageBoxInfoPartial.cshtml *@
+@model List<MessageInfo>
+@{
+    var id = TempData["userId"]?.ToString();
+}
+
+
+@if (Model != null)
+{
+    @foreach (var message in Model)
+    {
+        <div onclick="refresh(this)" id="@(message.SenderId != id ? message.SenderId : message.ReceiverId)"
+            class="message-info-box">
+            <img src="@message.PhotoUrl" alt="Profil Resmi">
+            <div class="message-content">
+                <h1>@message.Nickname</h1>
+                <p>@message.MessageText</p>
+            </div>
+            <div class="message-meta">
+                <p>@message.DateTime</p>
+                @if (message.SenderId == id)
+                {
+                    @if (message.Status)
+                    {
+                        <i style="color: #00aaff;" class="fa-solid fa-check"></i>
+                    }
+                    else
+                    {
+                        <i style="color: #898989;" class="fa-solid fa-check"></i>
+                    }
+                }
+            </div>
+        </div>
+    }
+}
+
+<script>
+    async function refresh(element) {
+        document.getElementById("messagedName").innerText = element.querySelector('h1').textContent;
+        document.getElementById("messagedProfilePhoto").src = element.querySelector("img").src;
+        await openMessage(element.id);
+        await showMessage(element.id);
+    }
+
+    function openMessage(id) {
+        $.ajax({
+            url: 'Base/OpenMessage',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ friendId: id }),
+            success: function (response) {
+                $('#messages-box-container').html(response);
+            },
+        });
+    }
+
+    function showMessage(id) {
+        $.ajax({
+            url: 'Base/ShowMessage',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ friendId: id }),
+            success: function (response) {
+                document.getElementById("message-container").style.display = "block";
+                sendButton.id = id;
+                $('#message-box').html(response);
+            },
+        });
+    }
+</script>

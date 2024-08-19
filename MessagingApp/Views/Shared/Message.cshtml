@@ -1,0 +1,29 @@
+@* Views/Shared/Message.cshtml *@
+@model List<Message>
+@{
+    var id = TempData["userId"]?.ToString();
+}
+
+@if (Model != null)
+{
+    @foreach (var message in Model)
+    {
+        <div class="message @(message.SenderId == id ? "right" : "left")">
+            <p>@message.MessageText</p>
+            <div class="message-info">
+                <p>@message.DateTime</p>
+                @if (message.SenderId == id)
+                {
+                    @if (message.Status)
+                    {
+                        <i style="color: #00aaff;" class="fa-solid fa-check"></i>
+                    }
+                    else
+                    {
+                        <i style="color: #898989;" class="fa-solid fa-check"></i>
+                    }
+                }
+            </div>
+        </div>
+    }
+}

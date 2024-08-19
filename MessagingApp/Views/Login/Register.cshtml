@@ -1,0 +1,64 @@
+@{
+    Layout = null;
+    var message = TempData["Message"] as string;
+    var status = TempData["Status"] as bool?;
+    var url = TempData["RedirectUrl"] as string;
+    if (message != null)
+    {
+        await Html.RenderPartialAsync("MessagePartial", Tuple.Create(message, status ?? false, url));
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="~/css/register.css">
+    <link rel="stylesheet" href="~/css/loginCommon.css">
+</head>
+
+<body>
+    <form class="form" method="post" asp-controller="Login" asp-action="Register">
+        <p class="title">Register </p>
+
+        <div class="flex">
+            <label>
+                <input class="input" type="text" name="name" placeholder="" required="">
+                <span>Firstname</span>
+            </label>
+
+            <label>
+                <input class="input" type="text" name="surname" placeholder="" required="">
+                <span>Lastname</span>
+            </label>
+        </div>
+
+        <label>
+            <input class="input" type="email" name="email" placeholder="" required="">
+            <span>E-Mail</span>
+        </label>
+
+        <label>
+            <input class="input" type="text" name="phone_number" id="phone_number" placeholder="" required="">
+            <span>Phone Number</span>
+        </label>
+
+        <label>
+            <input class="input" type="password" name="new_password" maxlength="15" placeholder="" required="">
+            <span>Password</span>
+        </label>
+        <label>
+            <input class="input" type="password" name="confirm_password" maxlength="15" placeholder="" required="">
+            <span>Confirm password</span>
+        </label>
+        <button class="submit">Register</button>
+        <p class="signin">Already have an acount ? <a href="@Url.Action("Login", "Login")">Sign-in</a> </p>
+    </form>
+
+    <script src="~/js/login.js"></script>
+</body>
+
+</html>

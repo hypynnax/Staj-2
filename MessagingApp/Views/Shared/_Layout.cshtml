@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] / MessagingApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div id="sidebarContainer" class="sidebar-container d-flex flex-column">
+            <div class="sidebar-content">
+                <div class="icons">
+
+                    <img src="~/img/icon.png" alt="App Icon" class="img-fluid">
+                    <div class="icon" id="addFriendIcon" title="Arkadaş Ekle">
+                        <i class="fa-solid fa-plus fa-xl"></i>
+                    </div>
+
+                    <div class="icon" id="addMessageIcon" title="Mesaj Gönder">
+                        <i class="fa-regular fa-message fa-xl"></i>
+                    </div>
+
+                    <div class="icon" id="addPhotoIcon" title="Foto Ekle/Değiş">
+                        <i class="fa-regular fa-image fa-xl"></i>
+                    </div>
+                </div>
+                <button id="logout" class="btn btn-danger"><i class="fa-solid fa-power-off fa-xl"></i></button>
+            </div>
+
+            <div id="addFriendContainer" class="add-friend-container">
+                <h1 class="title">Arkadaş Ekle</h1>
+                <div id="addFriendMessageBox" class="info-box">
+                    <p id="addFriendMessage"></p>
+                </div>
+                <div class="card-friend">
+                    <div class="card-friend-context">
+                        <img id="addPersonPhoto"
+                            src="https://firebasestorage.googleapis.com/v0/b/messagingapp-863cc.appspot.com/o/defaultProfilePhoto.png?alt=media&token=9479ecb3-2a48-410d-9918-685aced34f3f"
+                            alt="Profile Resmi">
+                        <h1 id="searchFriendName"></h1>
+                    </div>
+
+                    <div class="nickname-wrapper">
+                        <div class="input-wrapper">
+                            <legend>
+                                <label for="nickname">
+                                    Nickname
+                                </label>
+                            </legend>
+
+                            <div class="field">
+                                <input maxlength="35" id="nickname" type="text" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="search-box">
+                        <div class="phone-wrapper">
+                            <label class="phone-code"></label>
+                            <div class="input-wrapper">
+                                <legend>
+                                    <label for="phone_number">
+                                        Phonenumber*
+                                    </label>
+                                </legend>
+                                <div class="textfield">
+                                    <input pattern="\d+" maxlength="13" id="phone_number" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="addFriendButton" class="add-friend-button" type="button" disabled>
+                            <span class="add-friend-button-text">EKLE</span>
+                            <span class="add-friend-button-icon"><i class="fa-solid fa-plus"></i></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="addMessageContainer" class="add-message-container">
+                <h1 class="title">Mesaj Gönder</h1>
+                <div class="message-box-container">
+                    <div id="box" class="scroll-box"></div>
+                </div>
+                <button id="addMessageButton" name="addMessageButton" class="sendMessage" onclick="load(this)" disabled>
+                    <i class="fa-solid fa-paper-plane fa-xl" style="color: #000000;"></i>
+                </button>
+            </div>
+
+            <div id="addPhotoContainer" class="add-photo-container">
+                <h1 class="title">Profil</h1>
+                <div class="card-photo">
+                    <div class="photo-container">
+                        <div class="overlay" id="removePhotoButton">KALDIR</div>
+                        <img class="photo" id="userPhoto" src="@ViewData["UserProfilePhoto"]" alt="Profil Resmi">
+                    </div>
+
+                    <div class="photo-buttons">
+                        <button id="uploadPhotoButton" class="photo-button" title="Resim Yükle">
+                            <i class="fa-regular fa-image fa-xl"></i>
+                        </button>
+                        <input type="file" id="file" class="file" name="file" />
+
+                        <button id="addPhotoButton" class="photo-button" title="Kayıt Et">
+                            <i class="fa-regular fa-floppy-disk fa-xl"></i>
+                        </button>
+                    </div>
+
+                    <div id="addPhotoMessageBox" class="info-box" style="top: auto; bottom: 5px;!important">
+                        <p id="addPhotoMessage"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

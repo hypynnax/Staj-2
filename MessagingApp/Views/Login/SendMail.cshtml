@@ -1,0 +1,42 @@
+@{
+    Layout = null;
+    var message = TempData["Message"] as string;
+    var status = TempData["Status"] as bool?;
+    var url = TempData["RedirectUrl"] as string;
+    if (message != null)
+    {
+        await Html.RenderPartialAsync("MessagePartial", Tuple.Create(message, status ?? false, url));
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Change</title>
+    <link rel="stylesheet" href="~/css/forgetPassword.css">
+    <link rel="stylesheet" href="~/css/loginCommon.css">
+</head>
+
+<body>
+    <form class="form" method="post" asp-controller="Login" asp-action="SendMail">
+        <p class="title">Send Mail </p>
+
+        <label>
+            <input class="input" type="text" id="phone_number" name="phone_number" placeholder="" required="">
+            <span>Phone Number</span>
+        </label>
+
+        <label>
+            <input class="input" type="email" name="email" placeholder="" required="">
+            <span>E-Mail</span>
+        </label>
+        <button class="submit">Send Mail</button>
+    </form>
+
+    <script src="~/js/login.js"></script>
+</body>
+
+</html>

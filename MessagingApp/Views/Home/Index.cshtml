@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = TempData["Name"] + "'s Messages";
+    ViewData["UserProfilePhoto"] = TempData["UserProfilePhoto"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+
+@section Scripts {
+    <script src="~/js/index.js"></script>
+}
+
+<div class="messages-box-wrapper" id="messages-box-wrapper">
+    <h1 class="message-title">Mesaj Kutusu</h1>
+    <div class="messages-box-container" id="messages-box-container"> </div>
+</div>
+
+<div class="message-container" id="message-container">
+    <div class="message-header">
+        <img id="messagedProfilePhoto" src="" alt="Profile Foto">
+        <p class="messaged-name" id="messagedName"></p>
+    </div>
+
+    <div class="message-box" id="message-box"></div>
+
+    <div class="inputs">
+        <div class="input-box">
+            <button class="button" id="smile"><i class="fa-regular fa-face-laugh"></i></button>
+            <input class="messageInput" id="sendMessageInput" type="text">
+            <button class="button" id="attac"><i class="fa-solid fa-paperclip"></i></button>
+            <button class="button" id="cam"><i class="fa-solid fa-camera"></i></button>
+        </div>
+        <button class="send-button" id="mic"><i class="fa-solid fa-microphone"></i></button>
+        <button class="send-button" name="send">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
+                <path fill="none"
+                    d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888">
+                </path>
+                <path stroke-linejoin="round" stroke-linecap="round" stroke-width="33.67" stroke="#000"
+                    d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888">
+                </path>
+            </svg>
+        </button>
+    </div>
+</div>

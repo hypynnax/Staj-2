@@ -1,0 +1,27 @@
+@* Views/Shared/MessagePartial.cshtml *@
+@model Tuple<string, bool, string>
+@{
+    var actionUrl = Model.Item3;
+}
+
+@if (Model != null)
+{
+    var message = Model.Item1;
+    var isSuccess = Model.Item2;
+
+    <div id="info-box" class="message-container @(isSuccess ? "success" : "error")">
+        <p>@message</p>
+    </div>
+}
+<script>
+    var url = '@actionUrl';
+    var messageBox = document.getElementById("info-box");
+    setTimeout(() => {
+        messageBox.style.display = "none";
+        setTimeout(() => {
+            if (url != "") {
+                window.location.href = url;
+            }
+        }, 1000);
+    }, 3000);
+</script>

@@ -1,0 +1,21 @@
+.message-container {
+    color: #FFF;
+    font-weight: bold;
+    font-size: 14.5px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success {
+    background-color: green;
+}
+
+.error {
+    background-color: red;
+}

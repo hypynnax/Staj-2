@@ -1,0 +1,69 @@
+@* Views/Shared/MessageBoxPartial.cshtml *@
+@model Dictionary<string, FriendList>
+
+
+@if (Model != null)
+{
+    @foreach (var friend in Model)
+    {
+        <div onclick="sendButtonActive(this)" id="@friend.Value.UserId" class="add-friend-message-box">
+            <img src="@friend.Key" alt="Profil Resmi">
+            <h1>@friend.Value.Nickname</h1>
+        </div>
+    }
+}
+
+<script>
+    function sendButtonActive(element) {
+        var button = document.getElementsByName("addMessageButton")[0];
+        document.querySelectorAll(".add-friend-message-box").forEach(function (box) {
+            if (box.id != element.id)
+                box.style.backgroundColor = "#1B1B1B";
+        });
+
+        if (button.id == element.id) {
+            button.disabled = true;
+            button.id = "addMessageButton";
+            button.style.backgroundColor = "#00800088";
+            element.style.backgroundColor = "#1B1B1B";
+        } else {
+            button.disabled = false;
+            button.id = element.id;
+            button.style.backgroundColor = "#008000";
+            element.style.backgroundColor = "#008000";
+        }
+    }
+
+    async function load(element) {
+        await openMessage(element.id);
+        await ShowMessage(element.id);
+    }
+
+    function openMessage(id) {
+        $.ajax({
+            url: 'Base/OpenMessage',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ friendId: id }),
+            success: function (response) {
+                $('#messages-box-container').html(response);
+            },
+        });
+    }
+
+    function ShowMessage(id) {
+        $.ajax({
+            url: 'Base/ShowMessage',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ friendId: id }),
+            success: function (response) {
+                document.getElementById("message-container").style.display = "block";
+                sendButton.id = id;
+                document.getElementById("messagedName").innerText = document.getElementById(id).querySelector("h1").textContent;
+                document.getElementById("messagedProfilePhoto").src = document.getElementById(id).querySelector("img").src;
+                $('#message-box').html(response);
+            },
+        });
+    }
+</script>
