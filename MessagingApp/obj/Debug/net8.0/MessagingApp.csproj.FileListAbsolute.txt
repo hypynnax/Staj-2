@@ -34,3 +34,4 @@ N:\SOFTWARE\Staj 2 Proje\MessagingApp\bin\Debug\net8.0\System.Runtime.InteropSer
 N:\SOFTWARE\Staj 2 Proje\MessagingApp\obj\Debug\net8.0\MessagingApp.csproj.AssemblyReference.cache
 N:\SOFTWARE\Staj 2 Proje\MessagingApp\obj\Debug\net8.0\Messagin.063D81F2.Up2Date
 N:\SOFTWARE\Staj 2 Proje\MessagingApp\bin\Debug\net8.0\Firebase.Storage.dll
+N:\SOFTWARE\Staj 2 Proje\MessagingApp\obj\Debug\net8.0\MessagingApp.sourcelink.json
